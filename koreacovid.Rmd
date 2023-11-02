@@ -54,7 +54,9 @@ basicC + geom_bar(stat="identity",position="dodge")
 basicCC <- ggplot(dd2,aes(x=Sex,y=prcnt*100,fill=result)) 
 basicCC + geom_bar(stat="identity", position = "dodge")
 ```
-  
+
+the graph shows than men have a higher chance of dying than women in Korea from covid.
+
 ### Numerical Summaries  
 
 ```{r}
@@ -62,21 +64,26 @@ table1 <- xtabs(~result + Sex, data=kRdata)
 rowPerc(table1)
 colPerc(table1)
 ```
-
-  
-
+The data above shows that your more prone to dying to covid as a male than a female.
 
 
 
+## Inferential
 
-  
-## Numerical results
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+```
 
+we get a p-value of 0.0012, which is smaller than 0.05, meaning there is a correlation between death and sex.
 
-## Inferential results 
+```{r}
+fisher.test(table1)
+```
 
-
-
+with this test, we get a p-value of 9e-04 (.0009) which is smaller than 0.05, which also means a correlation between death and sex. you have a 2.3 to 1 odds of dying from covid as a male than a female.
 
 ## Conclusions
+
+is there a correlation between death and sex. well yes there is as we find out that there is a correlation between death and sex. how its a greater chance that you die from covid as a male than a female in Korea.  
 
