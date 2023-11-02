@@ -1,7 +1,7 @@
 ---
 title: "Initial Korean covid 19"
-author: "your name here"
-date: "todays date"
+author: "David"
+date: "NOV,1"
 output:
   html_document: default
   pdf_document: default
@@ -24,17 +24,44 @@ mutate(across(where(is.character), as.factor))
 Some of the data was uncoded for sex - sex must be just male or female
 77 of the data entries were coded sex  as blank, so we omit these.
 state of a patient must be died or alive - we adjust that as well   
+
+```{r}
+str(kRdata)
+```
+
   
 # Your Question - Is dying independent of sex?
+$H_0$: I have no idea, I'll see you in the Spring semester
+$H_A$: If i include a $50 bill in my final assignment, will i pass.
 
 
-
-
-
+## Method
+Since we are comparing $result to $sex, we then are going to use Cat~Cat 
 
 ## Graphical results - use ggplot commands to do this  
 
+```{r}
+dd2 <- kRdata %>% group_by(result,Sex) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
 
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(dd2,aes(x=Sex,y=count,fill=result))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(dd2,aes(x=Sex,y=prcnt*100,fill=result)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+  
+### Numerical Summaries  
+
+```{r}
+table1 <- xtabs(~result + Sex, data=kRdata)
+rowPerc(table1)
+colPerc(table1)
+```
 
   
 
